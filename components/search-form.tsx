@@ -87,9 +87,12 @@ export function SearchForm() {
               name="role"
               required
               rows={2}
-              placeholder="np. Sales Manager B2B, Data Engineer, HR Business Partner"
+              placeholder="np. Sales Manager B2B z doświadczeniem w SaaS, umiejętności negocjacyjne, znajomość CRM"
               className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-y"
             />
+            <p className="text-xs text-muted-foreground">
+              Im więcej szczegółów, tym lepsze wyniki — dodaj oczekiwane doświadczenie, umiejętności, narzędzia lub certyfikaty.
+            </p>
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="referenceLinkedin">
@@ -130,6 +133,7 @@ export function SearchForm() {
 
           <p className="text-xs text-muted-foreground text-center">
             Wyniki bazują na publicznie dostępnych danych z wyszukiwarek.
+            <br />
             Demo — maks. 3 wyszukiwania dziennie.
           </p>
         </form>
