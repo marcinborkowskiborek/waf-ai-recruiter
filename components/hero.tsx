@@ -8,7 +8,7 @@ export function Hero() {
         alt="WeAreFuture"
         width={240}
         height={60}
-        className="mx-auto mb-8 invert brightness-200"
+        className="mx-auto mb-8 brightness-0 invert"
       />
       <h1 className="text-4xl font-light tracking-tight">
         AI <span className="text-primary font-bold">Recruiter</span> Demo

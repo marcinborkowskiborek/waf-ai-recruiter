@@ -15,6 +15,7 @@ export function WynikiContent() {
   const role = searchParams.get('role') || '';
   const industry = searchParams.get('industry') || '';
   const level = searchParams.get('level') || 'senior';
+  const referenceLinkedin = searchParams.get('ref') || undefined;
 
   const hasSent = useRef(false);
 
@@ -25,10 +26,10 @@ export function WynikiContent() {
   useEffect(() => {
     if (!hasSent.current && role) {
       hasSent.current = true;
-      const prompt = getSystemPrompt(role, industry, level);
+      const prompt = getSystemPrompt(role, industry, level, referenceLinkedin);
       sendMessage({ text: prompt });
     }
-  }, [role, industry, level, sendMessage]);
+  }, [role, industry, level, referenceLinkedin, sendMessage]);
 
   const isComplete = status === 'ready' && messages.length > 1;
 
@@ -41,7 +42,7 @@ export function WynikiContent() {
             alt="WeAreFuture"
             width={160}
             height={40}
-            className="invert brightness-200"
+            className="brightness-0 invert"
           />
         </Link>
         {isComplete && (

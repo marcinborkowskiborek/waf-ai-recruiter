@@ -42,6 +42,7 @@ export function SearchForm() {
       role: fd.get('role') as string,
       industry: fd.get('industry') as string,
       level: fd.get('level') as SearchFormData['level'],
+      referenceLinkedin: (fd.get('referenceLinkedin') as string) || undefined,
     };
 
     // Save to localStorage for lead tracking + rate limiting
@@ -65,6 +66,9 @@ export function SearchForm() {
       industry: data.industry,
       level: data.level,
     });
+    if (data.referenceLinkedin) {
+      params.set('ref', data.referenceLinkedin);
+    }
     router.push(`/wyniki?${params.toString()}`);
   }
 
@@ -93,12 +97,23 @@ export function SearchForm() {
           <Separator className="my-4" />
 
           <div className="space-y-1.5">
-            <Label htmlFor="role">Kogo szukasz?</Label>
+            <Label htmlFor="role">Job description</Label>
             <Input
               id="role"
               name="role"
               required
               placeholder="np. Sales Manager B2B, Data Engineer, HR Business Partner"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="referenceLinkedin">
+              LinkedIn osoby referencyjnej <span className="text-muted-foreground font-normal">(opcjonalnie)</span>
+            </Label>
+            <Input
+              id="referenceLinkedin"
+              name="referenceLinkedin"
+              type="url"
+              placeholder="https://linkedin.com/in/przykładowa-osoba"
             />
           </div>
           <div className="grid grid-cols-2 gap-3">

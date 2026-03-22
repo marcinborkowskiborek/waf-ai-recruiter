@@ -5,6 +5,7 @@ export interface SearchFormData {
   role: string;
   industry: string;
   level: 'junior' | 'regular' | 'senior' | 'lead' | 'head' | 'director' | 'c-level';
+  referenceLinkedin?: string;
 }
 
 export interface Candidate {
