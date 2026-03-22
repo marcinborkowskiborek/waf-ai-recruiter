@@ -22,15 +22,15 @@ export function BlurredCandidates({ count }: BlurredCandidatesProps) {
         ))}
       </div>
 
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/60 backdrop-blur-sm rounded-lg">
-        <p className="text-lg font-light mb-2">
-          +{count} kandydatów
-        </p>
-        <p className="text-sm text-muted-foreground mb-4">
-          Chcesz zobaczyć pełne wyniki?
+      <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg border border-primary/20 bg-primary/5 backdrop-blur-sm">
+        <h2 className="text-xl font-light mb-2">
+          Chcesz pełną listę kandydatów?
+        </h2>
+        <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto text-center">
+          +{count} kolejnych kandydatów. Nasi eksperci pomogą Ci z pełnym sourcing&apos;iem, weryfikacją kandydatów i wdrożeniem AI w HR.
         </p>
         <a href="https://calendly.com/marcin-wearefuture/wirtualna-kawa" target="_blank" rel="noopener noreferrer">
-          <Button size="lg">
+          <Button size="lg" className="text-base px-8">
             Umów bezpłatną rozmowę
           </Button>
         </a>

@@ -78,42 +78,23 @@ export function WynikiContent() {
       {!error && <SearchResults messages={messages.filter(m => m.role === 'assistant')} status={status} />}
 
       {isComplete && (
-        <>
-          <div className="text-center mt-12 py-10 px-6 rounded-lg border border-primary/20 bg-primary/5">
-            <h2 className="text-xl font-light mb-2">
-              Chcesz pełną listę kandydatów?
-            </h2>
-            <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto">
-              Nasi eksperci pomogą Ci z pełnym sourcing&apos;iem, weryfikacją kandydatów i wdrożeniem AI w HR.
-            </p>
+        <footer className="text-center mt-12 pb-8 space-y-4">
+          <p className="text-sm text-muted-foreground">
+            Demo stworzone przez{' '}
             <a
-              href="https://calendly.com/marcin-wearefuture/wirtualna-kawa"
+              href="https://wearefuture.ai"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-primary hover:underline"
             >
-              <Button size="lg" className="text-base px-8">
-                Umów bezpłatną rozmowę
-              </Button>
+              WeAreFuture
             </a>
-          </div>
-          <footer className="text-center mt-8 pb-8 space-y-4">
-            <p className="text-sm text-muted-foreground">
-              Demo stworzone przez{' '}
-              <a
-                href="https://wearefuture.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                WeAreFuture
-              </a>
-              {' '}&mdash; Tworzymy przyszłość pracy. <span className="text-primary">Teraz.</span>
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Wyniki bazują na publicznie dostępnych danych z wyszukiwarek internetowych.
-            </p>
-          </footer>
-        </>
+            {' '}&mdash; Tworzymy przyszłość pracy. <span className="text-primary">Teraz.</span>
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Wyniki bazują na publicznie dostępnych danych z wyszukiwarek internetowych.
+          </p>
+        </footer>
       )}
     </main>
   );
