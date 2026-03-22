@@ -56,11 +56,11 @@ export function WynikiContent() {
 
       <div className="mb-6">
         <h1 className="text-2xl font-light">
-          Szukam: <span className="text-primary font-medium">{role.length > 60 ? role.slice(0, 60) + '...' : role}</span>
+          Szukam kandydatów
         </h1>
         <p className="text-sm text-muted-foreground">
-          {industry && `${industry} \u00B7 `}{level} \u00B7 Polska
-          {referenceLinkedin && ' \u00B7 z profilem referencyjnym'}
+          {industry && <>{industry} &middot; </>}{level} &middot; Polska
+          {referenceLinkedin && ' · z profilem referencyjnym'}
         </p>
       </div>
 
