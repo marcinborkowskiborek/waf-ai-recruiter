@@ -56,7 +56,7 @@ export function WynikiContent() {
 
       <div className="mb-6">
         <h1 className="text-2xl font-light">
-          Szukam: <span className="text-primary font-medium">{role}</span>
+          Szukam: <span className="text-primary font-medium">{role.length > 60 ? role.slice(0, 60) + '...' : role}</span>
         </h1>
         <p className="text-sm text-muted-foreground">
           {industry && `${industry} \u00B7 `}{level} \u00B7 Polska

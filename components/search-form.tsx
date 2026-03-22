@@ -45,21 +45,10 @@ export function SearchForm() {
       referenceLinkedin: (fd.get('referenceLinkedin') as string) || undefined,
     };
 
-    // Save to localStorage for lead tracking + rate limiting
+    // Save to localStorage for lead tracking
     const searches = JSON.parse(localStorage.getItem('waf_searches') || '[]');
     searches.push({ ...data, timestamp: new Date().toISOString() });
     localStorage.setItem('waf_searches', JSON.stringify(searches));
-
-    // Client-side rate limit check
-    const today = new Date().toISOString().slice(0, 10);
-    const todaySearches = searches.filter(
-      (s: { timestamp: string }) => s.timestamp.startsWith(today)
-    );
-    if (todaySearches.length > 3) {
-      alert('Limit 3 wyszukiwań dziennie wyczerpany. Wróć jutro lub umów się na rozmowę z WeAreFuture.');
-      setPending(false);
-      return;
-    }
 
     const params = new URLSearchParams({
       role: data.role,

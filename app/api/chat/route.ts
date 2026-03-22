@@ -1,20 +1,14 @@
 import { streamText, stepCountIs } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { webSearch } from '@/lib/tools';
-import { checkRateLimit, incrementRateLimit } from '@/lib/rate-limit';
 
 const anthropic = createAnthropic();
 
 export const maxDuration = 60;
 
 export async function POST(req: Request) {
-  const { allowed } = await checkRateLimit();
-  if (!allowed) {
-    return new Response(
-      JSON.stringify({ error: 'Limit wyszukiwań wyczerpany. Wróć jutro lub umów się na rozmowę z WeAreFuture.' }),
-      { status: 429, headers: { 'Content-Type': 'application/json' } }
-    );
-  }
+  // Rate limiting disabled for testing
+  // TODO: re-enable before public launch
 
   const { messages } = await req.json();
 
@@ -24,8 +18,6 @@ export async function POST(req: Request) {
     .map((p: { text: string }) => p.text)
     .join('') || '';
 
-  const cookieValue = await incrementRateLimit();
-
   const result = streamText({
     model: anthropic('claude-sonnet-4-6'),
     system: systemPrompt,
@@ -34,10 +26,5 @@ export async function POST(req: Request) {
     prompt: 'Rozpocznij wyszukiwanie kandydatów zgodnie z instrukcjami.',
   });
 
-  const response = result.toUIMessageStreamResponse();
-  response.headers.set(
-    'Set-Cookie',
-    `waf_rc=${encodeURIComponent(cookieValue)}; HttpOnly; Secure; SameSite=Lax; Max-Age=86400; Path=/`
-  );
-  return response;
+  return result.toUIMessageStreamResponse();
 }
