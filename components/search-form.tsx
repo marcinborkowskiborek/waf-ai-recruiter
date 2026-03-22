@@ -108,7 +108,7 @@ export function SearchForm() {
               <Input id="industry" name="industry" placeholder="np. IT, FMCG, pharma" />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="level">Poziom</Label>
+              <Label htmlFor="level">Seniority</Label>
               <Select name="level" defaultValue="senior">
                 <SelectTrigger id="level">
                   <SelectValue />
