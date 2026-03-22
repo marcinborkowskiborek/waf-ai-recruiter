@@ -60,6 +60,7 @@ export function WynikiContent() {
         </h1>
         <p className="text-sm text-muted-foreground">
           {industry && `${industry} \u00B7 `}{level} \u00B7 Polska
+          {referenceLinkedin && ' \u00B7 z profilem referencyjnym'}
         </p>
       </div>
 
@@ -74,26 +75,45 @@ export function WynikiContent() {
         </div>
       )}
 
-      {!error && <SearchResults messages={messages} status={status} />}
+      {!error && <SearchResults messages={messages.filter(m => m.role === 'assistant')} status={status} />}
 
       {isComplete && (
-        <footer className="text-center mt-12 pb-8 space-y-4">
-          <p className="text-sm text-muted-foreground">
-            Demo stworzone przez{' '}
+        <>
+          <div className="text-center mt-12 py-10 px-6 rounded-lg border border-primary/20 bg-primary/5">
+            <h2 className="text-xl font-light mb-2">
+              Chcesz pełną listę kandydatów?
+            </h2>
+            <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto">
+              Nasi eksperci pomogą Ci z pełnym sourcing&apos;iem, weryfikacją kandydatów i wdrożeniem AI w HR.
+            </p>
             <a
-              href="https://wearefuture.ai"
+              href="https://calendar.app.google/YOUR_BOOKING_LINK"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline"
             >
-              WeAreFuture
+              <Button size="lg" className="text-base px-8">
+                Umów bezpłatną rozmowę
+              </Button>
             </a>
-            {' '}\u2014 Tworzymy przyszłość pracy. <span className="text-primary">Teraz.</span>
-          </p>
-          <p className="text-xs text-muted-foreground">
-            Wyniki bazują na publicznie dostępnych danych z wyszukiwarek internetowych.
-          </p>
-        </footer>
+          </div>
+          <footer className="text-center mt-8 pb-8 space-y-4">
+            <p className="text-sm text-muted-foreground">
+              Demo stworzone przez{' '}
+              <a
+                href="https://wearefuture.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                WeAreFuture
+              </a>
+              {' '}&mdash; Tworzymy przyszłość pracy. <span className="text-primary">Teraz.</span>
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Wyniki bazują na publicznie dostępnych danych z wyszukiwarek internetowych.
+            </p>
+          </footer>
+        </>
       )}
     </main>
   );
