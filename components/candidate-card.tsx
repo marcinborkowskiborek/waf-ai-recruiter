@@ -34,8 +34,11 @@ export function CandidateCard({ candidate, index }: CandidateCardProps) {
               {candidate.tier}
             </Badge>
           </div>
+          <p className="text-sm text-foreground/90">
+            {candidate.currentRole}
+          </p>
           <p className="text-sm">
-            {candidate.currentRole} @ <strong>{candidate.currentCompany}</strong>
+            @ <strong>{candidate.currentCompany}</strong>
           </p>
           {candidate.previousCompanies.length > 0 && (
             <p className="text-xs text-muted-foreground">

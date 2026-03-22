@@ -38,7 +38,6 @@ export function SearchForm() {
     const data: SearchFormData = {
       name: fd.get('name') as string,
       email: fd.get('email') as string,
-      company: fd.get('company') as string,
       role: fd.get('role') as string,
       industry: fd.get('industry') as string,
       level: fd.get('level') as SearchFormData['level'],
@@ -74,24 +73,22 @@ export function SearchForm() {
               <Input id="name" name="name" required placeholder="Anna" />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="company">Firma</Label>
-              <Input id="company" name="company" required placeholder="Acme Sp. z o.o." />
+              <Label htmlFor="email">Email służbowy</Label>
+              <Input id="email" name="email" type="email" required placeholder="anna@acme.pl" />
             </div>
-          </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Email służbowy</Label>
-            <Input id="email" name="email" type="email" required placeholder="anna@acme.pl" />
           </div>
 
           <Separator className="my-4" />
 
           <div className="space-y-1.5">
             <Label htmlFor="role">Job description</Label>
-            <Input
+            <textarea
               id="role"
               name="role"
               required
+              rows={2}
               placeholder="np. Sales Manager B2B, Data Engineer, HR Business Partner"
+              className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-y"
             />
           </div>
           <div className="space-y-1.5">

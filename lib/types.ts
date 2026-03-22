@@ -1,7 +1,6 @@
 export interface SearchFormData {
   name: string;
   email: string;
-  company: string;
   role: string;
   industry: string;
   level: 'junior' | 'regular' | 'senior' | 'lead' | 'head' | 'director' | 'c-level';
