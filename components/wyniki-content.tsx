@@ -45,9 +45,11 @@ export function WynikiContent() {
           />
         </Link>
         {isComplete && (
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/">Nowe wyszukiwanie</Link>
-          </Button>
+          <Link href="/">
+            <Button variant="outline" size="sm">
+              Nowe wyszukiwanie
+            </Button>
+          </Link>
         )}
       </header>
 
@@ -63,9 +65,11 @@ export function WynikiContent() {
       {error && (
         <div className="text-center py-8 space-y-4">
           <p className="text-destructive">{error.message || 'Wystąpił błąd podczas wyszukiwania.'}</p>
-          <Button variant="outline" asChild>
-            <Link href="/">Spróbuj ponownie</Link>
-          </Button>
+          <Link href="/">
+            <Button variant="outline">
+              Spróbuj ponownie
+            </Button>
+          </Link>
         </div>
       )}
 

@@ -29,11 +29,11 @@ export function BlurredCandidates({ count }: BlurredCandidatesProps) {
         <p className="text-sm text-muted-foreground mb-4">
           Chcesz zobaczyć pełne wyniki?
         </p>
-        <Button asChild size="lg">
-          <a href="https://wearefuture.ai" target="_blank" rel="noopener noreferrer">
+        <a href="https://wearefuture.ai" target="_blank" rel="noopener noreferrer">
+          <Button size="lg">
             Umów rozmowę z WeAreFuture
-          </a>
-        </Button>
+          </Button>
+        </a>
       </div>
     </div>
   );

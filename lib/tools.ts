@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 export const webSearch = tool({
   description: 'Search Google for publicly available information. Use to find LinkedIn profiles, company team pages, and professional directories.',
-  parameters: z.object({
+  inputSchema: z.object({
     query: z.string().describe('The search query to execute'),
   }),
   execute: async ({ query }) => {
