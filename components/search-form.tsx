@@ -110,7 +110,7 @@ export function SearchForm() {
             <div className="space-y-1.5">
               <Label htmlFor="level">Seniority</Label>
               <Select name="level" defaultValue="senior">
-                <SelectTrigger id="level">
+                <SelectTrigger id="level" className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
