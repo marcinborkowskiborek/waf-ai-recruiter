@@ -87,7 +87,7 @@ export function WynikiContent() {
               Nasi eksperci pomogą Ci z pełnym sourcing&apos;iem, weryfikacją kandydatów i wdrożeniem AI w HR.
             </p>
             <a
-              href="https://calendar.app.google/YOUR_BOOKING_LINK"
+              href="https://calendly.com/marcin-wearefuture/wirtualna-kawa"
               target="_blank"
               rel="noopener noreferrer"
             >

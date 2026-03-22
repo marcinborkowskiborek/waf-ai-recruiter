@@ -29,9 +29,9 @@ export function BlurredCandidates({ count }: BlurredCandidatesProps) {
         <p className="text-sm text-muted-foreground mb-4">
           Chcesz zobaczyć pełne wyniki?
         </p>
-        <a href="https://wearefuture.ai" target="_blank" rel="noopener noreferrer">
+        <a href="https://calendly.com/marcin-wearefuture/wirtualna-kawa" target="_blank" rel="noopener noreferrer">
           <Button size="lg">
-            Umów rozmowę z WeAreFuture
+            Umów bezpłatną rozmowę
           </Button>
         </a>
       </div>
