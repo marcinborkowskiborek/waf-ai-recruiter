@@ -1,7 +1,9 @@
 import { streamText, stepCountIs } from 'ai';
-import { gateway } from '@ai-sdk/gateway';
+import { createAnthropic } from '@ai-sdk/anthropic';
 import { webSearch } from '@/lib/tools';
 import { checkRateLimit, incrementRateLimit } from '@/lib/rate-limit';
+
+const anthropic = createAnthropic();
 
 export const maxDuration = 60;
 
@@ -25,7 +27,7 @@ export async function POST(req: Request) {
   const cookieValue = await incrementRateLimit();
 
   const result = streamText({
-    model: gateway('anthropic/claude-sonnet-4.6'),
+    model: anthropic('claude-sonnet-4-6'),
     system: systemPrompt,
     tools: { web_search: webSearch },
     stopWhen: stepCountIs(8),
