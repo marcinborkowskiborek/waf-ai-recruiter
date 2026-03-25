@@ -44,13 +44,14 @@ export function SearchForm() {
       referenceLinkedin: (fd.get('referenceLinkedin') as string) || undefined,
     };
 
-    // Save to localStorage for lead tracking
+    // Save full form data to localStorage (JD can be too long for URL)
     const searches = JSON.parse(localStorage.getItem('waf_searches') || '[]');
     searches.push({ ...data, timestamp: new Date().toISOString() });
     localStorage.setItem('waf_searches', JSON.stringify(searches));
+    localStorage.setItem('waf_current_search', JSON.stringify(data));
 
     const params = new URLSearchParams({
-      role: data.role,
+      role: data.role.slice(0, 80),
       industry: data.industry,
       level: data.level,
     });
@@ -81,13 +82,14 @@ export function SearchForm() {
           <Separator className="my-4" />
 
           <div className="space-y-1.5">
-            <Label htmlFor="role">Job description</Label>
+            <Label htmlFor="role">Kogo szukasz? <span className="text-muted-foreground font-normal">(maks. 1000 znaków)</span></Label>
             <textarea
               id="role"
               name="role"
               required
-              rows={2}
-              placeholder="np. Sales Manager B2B z doświadczeniem w SaaS, umiejętności negocjacyjne, znajomość CRM"
+              maxLength={1000}
+              rows={3}
+              placeholder="np. Sales Manager B2B, doświadczenie w SaaS, CRM, negocjacje, angielski C1"
               className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 resize-y"
             />
           </div>

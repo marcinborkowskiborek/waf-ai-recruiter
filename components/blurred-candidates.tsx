@@ -3,9 +3,10 @@ import { Button } from '@/components/ui/button';
 
 interface BlurredCandidatesProps {
   count: number;
+  searching?: boolean;
 }
 
-export function BlurredCandidates({ count }: BlurredCandidatesProps) {
+export function BlurredCandidates({ count, searching }: BlurredCandidatesProps) {
   if (count <= 0) return null;
 
   return (
@@ -27,7 +28,9 @@ export function BlurredCandidates({ count }: BlurredCandidatesProps) {
           Chcesz pełną listę kandydatów?
         </h2>
         <p className="text-muted-foreground mb-6 text-sm max-w-md mx-auto text-center">
-          +{count} kolejnych kandydatów. Nasi eksperci pomogą Ci z pełnym sourcing&apos;iem, weryfikacją kandydatów i wdrożeniem AI w HR.
+          {searching
+            ? `Już +${count} kolejnych kandydatów — i wciąż szukam. Nasi eksperci pomogą Ci z pełnym sourcing'iem i wdrożeniem AI w HR.`
+            : `+${count} kolejnych kandydatów. Nasi eksperci pomogą Ci z pełnym sourcing'iem, weryfikacją kandydatów i wdrożeniem AI w HR.`}
         </p>
         <a href="https://calendly.com/marcin-wearefuture/wirtualna-kawa" target="_blank" rel="noopener noreferrer">
           <Button size="lg" className="text-base px-8">

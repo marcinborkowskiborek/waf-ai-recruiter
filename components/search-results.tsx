@@ -10,15 +10,17 @@ import type { UIMessage } from 'ai';
 const VISIBLE_COUNT = 5;
 
 function parseCandidates(text: string): (Candidate & { tier: string })[] {
-  const blocks = text.split('===KANDYDAT===').slice(1);
+  // Split on ===KANDYDAT=== with tolerance for markdown bold, extra whitespace, etc.
+  const blocks = text.split(/\*{0,2}={2,}KANDYDAT={2,}\*{0,2}/).slice(1);
   return blocks
     .map((block) => {
-      const end = block.indexOf('===END===');
+      const end = block.search(/\*{0,2}={2,}END={2,}\*{0,2}/);
       const content = end > -1 ? block.slice(0, end) : block;
 
       const get = (label: string): string => {
-        const match = content.match(new RegExp(`${label}:\\s*(.+)`));
-        return match?.[1]?.trim() || '';
+        // Tolerate markdown bold around labels: **Imię i nazwisko:** or - Imię i nazwisko:
+        const match = content.match(new RegExp(`\\*{0,2}-?\\s*${label}\\s*\\*{0,2}:\\s*(.+)`, 'i'));
+        return match?.[1]?.replace(/\*{1,2}/g, '').trim() || '';
       };
 
       const name = get('Imię i nazwisko');
@@ -31,7 +33,7 @@ function parseCandidates(text: string): (Candidate & { tier: string })[] {
         previousCompanies: get('Poprzednie firmy').split(',').map((s) => s.trim()).filter(Boolean),
         linkedinUrl: get('LinkedIn'),
         whyMatch: get('Dopasowanie'),
-        tier: get('Tier') || 'GOOD',
+        tier: (get('Tier').toUpperCase().match(/TOP|STRONG|GOOD/)?.[0]) || 'GOOD',
       };
     })
     .filter(Boolean) as (Candidate & { tier: string })[];
@@ -89,8 +91,8 @@ export function SearchResults({ messages, status }: SearchResultsProps) {
         </div>
       )}
 
-      {!isSearching && hiddenCount > 0 && (
-        <BlurredCandidates count={hiddenCount} />
+      {hiddenCount > 0 && (
+        <BlurredCandidates count={hiddenCount} searching={isSearching} />
       )}
 
       {!isSearching && candidates.length === 0 && fullText.length > 0 && (

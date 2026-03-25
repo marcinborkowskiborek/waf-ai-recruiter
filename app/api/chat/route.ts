@@ -41,6 +41,7 @@ export async function POST(req: Request) {
     tools: { web_search: webSearch },
     stopWhen: stepCountIs(8),
     prompt: 'Rozpocznij wyszukiwanie kandydatów zgodnie z instrukcjami.',
+    maxRetries: 5,
   });
 
   return result.toUIMessageStreamResponse();
