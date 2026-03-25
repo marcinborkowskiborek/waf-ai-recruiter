@@ -1,10 +1,11 @@
 export interface SearchFormData {
-  name: string;
-  email: string;
   role: string;
   industry: string;
-  level: 'junior' | 'regular' | 'senior' | 'lead' | 'head' | 'director' | 'c-level';
+  level: 'junior' | 'mid' | 'senior' | 'executive';
   referenceLinkedin?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }
 
 export interface Candidate {
@@ -14,4 +15,13 @@ export interface Candidate {
   currentCompany: string;
   previousCompanies: string[];
   whyMatch: string;
+}
+
+export interface LeadCaptureData {
+  email: string;
+  searchRole?: string;
+  searchIndustry?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
 }

@@ -2,15 +2,11 @@
 
 import { useMemo } from 'react';
 import { CandidateCard } from './candidate-card';
-import { BlurredCandidates } from './blurred-candidates';
 import { SearchProgress } from './search-progress';
 import type { Candidate } from '@/lib/types';
 import type { UIMessage } from 'ai';
 
-const VISIBLE_COUNT = 5;
-
 function parseCandidates(text: string): (Candidate & { tier: string })[] {
-  // Split on ===KANDYDAT=== with tolerance for markdown bold, extra whitespace, etc.
   const blocks = text.split(/\*{0,2}={2,}KANDYDAT={2,}\*{0,2}/).slice(1);
   return blocks
     .map((block) => {
@@ -18,7 +14,6 @@ function parseCandidates(text: string): (Candidate & { tier: string })[] {
       const content = end > -1 ? block.slice(0, end) : block;
 
       const get = (label: string): string => {
-        // Tolerate markdown bold around labels: **Imię i nazwisko:** or - Imię i nazwisko:
         const match = content.match(new RegExp(`\\*{0,2}-?\\s*${label}\\s*\\*{0,2}:\\s*(.+)`, 'i'));
         return match?.[1]?.replace(/\*{1,2}/g, '').trim() || '';
       };
@@ -42,9 +37,10 @@ function parseCandidates(text: string): (Candidate & { tier: string })[] {
 interface SearchResultsProps {
   messages: UIMessage[];
   status: string;
+  onCandidateCount?: (count: number) => void;
 }
 
-export function SearchResults({ messages, status }: SearchResultsProps) {
+export function SearchResults({ messages, status, onCandidateCount }: SearchResultsProps) {
   const isSearching = status === 'streaming' || status === 'submitted';
 
   const assistantMsg = messages.find((m) => m.role === 'assistant');
@@ -66,10 +62,11 @@ export function SearchResults({ messages, status }: SearchResultsProps) {
       }));
   }, [assistantMsg?.parts]);
 
-  const candidates = useMemo(() => parseCandidates(fullText), [fullText]);
-
-  const visibleCandidates = candidates.slice(0, VISIBLE_COUNT);
-  const hiddenCount = Math.max(0, candidates.length - VISIBLE_COUNT);
+  const candidates = useMemo(() => {
+    const parsed = parseCandidates(fullText);
+    onCandidateCount?.(parsed.length);
+    return parsed;
+  }, [fullText, onCandidateCount]);
 
   return (
     <div className="space-y-6">
@@ -80,19 +77,12 @@ export function SearchResults({ messages, status }: SearchResultsProps) {
         />
       )}
 
-      {visibleCandidates.length > 0 && (
+      {candidates.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-lg font-light">
-            Znalezieni kandydaci ({candidates.length})
-          </h2>
-          {visibleCandidates.map((c, i) => (
+          {candidates.map((c, i) => (
             <CandidateCard key={i} candidate={c} index={i} />
           ))}
         </div>
-      )}
-
-      {hiddenCount > 0 && (
-        <BlurredCandidates count={hiddenCount} searching={isSearching} />
       )}
 
       {!isSearching && candidates.length === 0 && fullText.length > 0 && (
@@ -103,3 +93,5 @@ export function SearchResults({ messages, status }: SearchResultsProps) {
     </div>
   );
 }
+
+export { parseCandidates };

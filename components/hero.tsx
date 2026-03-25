@@ -13,11 +13,10 @@ export function Hero() {
         />
       </a>
       <h1 className="text-4xl font-light tracking-tight">
-        AI <span className="text-primary font-bold">Recruiter</span> Demo
+        Znajdź dopasowanych kandydatów <span className="text-primary font-bold">w 60 sekund</span>
       </h1>
       <p className="text-muted-foreground text-lg max-w-xl mx-auto font-light">
-        Wpisz rolę, którą rekrutujesz. AI przeszuka publicznie dostępne źródła
-        i w kilkadziesiąt sekund znajdzie potencjalnych kandydatów.
+        Bez LinkedIn Recruitera. Bez subskrypcji. Wklej opis stanowiska &mdash; resztę zrobi AI.
       </p>
     </section>
   );

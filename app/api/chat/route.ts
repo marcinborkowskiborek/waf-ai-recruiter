@@ -1,14 +1,24 @@
 import { streamText, stepCountIs } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { webSearch } from '@/lib/tools';
+import { isTestingActive, incrementSearchCount } from '@/lib/redis';
 
 const anthropic = createAnthropic();
 
 export const maxDuration = 120;
 
 export async function POST(req: Request) {
-  // Rate limiting disabled for testing
-  // TODO: re-enable before public launch
+  // Check if testing period is still active
+  const active = await isTestingActive();
+  if (!active) {
+    return Response.json(
+      { error: 'Testy zakończone. Dziękujemy za udział!' },
+      { status: 403 }
+    );
+  }
+
+  // Increment global search counter
+  await incrementSearchCount();
 
   const { messages } = await req.json();
 
@@ -29,14 +39,14 @@ export async function POST(req: Request) {
 
   if (!systemPrompt) {
     console.error('No system prompt extracted from messages:', JSON.stringify(messages).slice(0, 500));
-    return new Response(
-      JSON.stringify({ error: 'Brak danych wyszukiwania. Wróć na stronę główną i spróbuj ponownie.' }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } }
+    return Response.json(
+      { error: 'Brak danych wyszukiwania. Wróć na stronę główną i spróbuj ponownie.' },
+      { status: 400 }
     );
   }
 
   const result = streamText({
-    model: anthropic('claude-sonnet-4-6'),
+    model: anthropic('claude-sonnet-4.6'),
     system: systemPrompt,
     tools: { web_search: webSearch },
     stopWhen: stepCountIs(8),

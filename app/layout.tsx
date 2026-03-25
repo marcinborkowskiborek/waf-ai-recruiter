@@ -9,12 +9,12 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "AI Recruiter Demo | WeAreFuture",
+  title: "AI Recruiter | WeAreFuture — Znajdź kandydatów w 60 sekund",
   description:
-    "Zobacz jak AI może wspierać Twój zespół HR w wyszukiwaniu kandydatów.",
+    "Bez LinkedIn Recruitera. Bez subskrypcji. Wklej opis stanowiska — resztę zrobi AI.",
   openGraph: {
-    title: "AI Recruiter Demo | WeAreFuture",
-    description: "Wpisz rolę — AI znajdzie kandydatów w kilkadziesiąt sekund.",
+    title: "AI Recruiter | WeAreFuture — Znajdź kandydatów w 60 sekund",
+    description: "Bez LinkedIn Recruitera. Bez subskrypcji. Wklej opis stanowiska — resztę zrobi AI.",
     siteName: "WeAreFuture",
   },
 };
